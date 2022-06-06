@@ -1,3 +1,4 @@
+using ChattyApp.Server.Services.Implementations;
 using Microsoft.AspNetCore.ResponseCompression;
 
 namespace Company.WebApplication1
@@ -13,7 +14,14 @@ namespace Company.WebApplication1
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
 
+            builder.Services.AddSignalR();
+            builder.Services.AddResponseCompression(opts =>
+                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes
+                                    .Concat(new[] { "application/octet-stream" }));
+
             var app = builder.Build();
+
+            app.UseResponseCompression();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -37,6 +45,9 @@ namespace Company.WebApplication1
 
             app.MapRazorPages();
             app.MapControllers();
+
+            app.MapHub<ChatServiceHub>("/lets-chat");
+
             app.MapFallbackToFile("index.html");
 
             app.Run();
