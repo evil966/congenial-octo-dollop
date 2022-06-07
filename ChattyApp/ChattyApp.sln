@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChattyApp.Server", "ChattyApp\Server\ChattyApp.Server.csproj", "{E5BD3FED-124E-4B60-B486-93ED9B1028DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChattyApp.Server", "ChattyApp\Server\ChattyApp.Server.csproj", "{E5BD3FED-124E-4B60-B486-93ED9B1028DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChattyApp.Client", "ChattyApp\Client\ChattyApp.Client.csproj", "{CC3A5253-847B-47E8-8644-E7DB9910808A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChattyApp.Client", "ChattyApp\Client\ChattyApp.Client.csproj", "{CC3A5253-847B-47E8-8644-E7DB9910808A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChattyApp.Shared", "ChattyApp\Shared\ChattyApp.Shared.csproj", "{7511B8AE-B85E-4C97-B8F3-0BF12BD3F741}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChattyApp.Shared", "ChattyApp\Shared\ChattyApp.Shared.csproj", "{7511B8AE-B85E-4C97-B8F3-0BF12BD3F741}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
