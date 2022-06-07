@@ -1,0 +1,23 @@
+﻿<div class="input-group">
+    <input value="@CurrentMessage" class="form-control" @oninput="OnCurrentMessageChanged" placeholder="message">
+    <button class="btn btn-primary form-group-append" @onclick="SendMessage">Send</button>
+</div>
+
+@code {
+    [Parameter]
+    public string? CurrentMessage { get; set; }
+
+    [Parameter]
+    public EventCallback Send { get; set; }
+
+    [Parameter]
+    public EventCallback<string> CurrentMessageChanged { get; set; }
+
+    private async Task SendMessage() => await Send.InvokeAsync();
+    private async Task OnCurrentMessageChanged(ChangeEventArgs e)
+    {
+        CurrentMessage = e.Value?.ToString();
+        await CurrentMessageChanged.InvokeAsync(CurrentMessage);
+    }
+   
+}

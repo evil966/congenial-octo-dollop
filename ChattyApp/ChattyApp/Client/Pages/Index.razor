@@ -9,18 +9,12 @@
 
 @if (!IsConnected)
 {
-    <div class="input-group">
-        <input @bind="_user" class="form-control" placeholder="username">
-        <button class="btn btn-primary form-control-append" @onclick="Connect">Connect</button>
-    </div>
+    <User @bind-Username="_user" Connect="Connect" />
 }
 else
 {
-    <textarea style="width:100%; height:500px;" @ref="TextAreaRef">@_messages</textarea>
-    <div class="input-group">
-        <input @bind-value="_currentMessage" @bind-value:event="oninput" @onkeyup="HandleInput" class="form-control">
-        <button class="btn btn-primary form-group-append" @onclick="Send" disabled="@(!IsConnected)">Send</button>
-    </div>
+    <ChatMessages @bind-Messages="_messages" ConnectionId="@_connection?.ConnectionId" Username="_user" />
+    <Message @bind-CurrentMessage="_currentMessage" Send="Send" />
 }
 
 @code {
@@ -51,19 +45,10 @@ else
         {
             _messages += $"{(string.IsNullOrWhiteSpace(user) ? string.Empty : user)} => {message}\n";
 
-            JSRuntime.InvokeVoidAsync("scrollToBottom", TextAreaRef);
             StateHasChanged();
         });
 
         await _connection.StartAsync();
-    }
-
-    private async Task HandleInput(KeyboardEventArgs args)
-    {
-        if (args.Key.Equals("Enter"))
-        {
-            await Send();
-        }
     }
 
     private async Task Send()

@@ -1,0 +1,22 @@
+﻿<p>Current User: @(Username) => Id{@(ConnectionId)}</p>
+<textarea style="width:100%; height:500px;" value="@Messages" @oninput="OnMessagesChanged" />
+
+@code {
+    [Parameter]
+    public string? Username { get; set; }
+
+    [Parameter]
+    public string? ConnectionId { get; set; }
+
+    [Parameter]
+    public string? Messages { get; set; }
+
+    [Parameter]
+    public EventCallback<string> MessagesChanged { get; set; }
+
+    private async Task OnMessagesChanged(ChangeEventArgs e)
+    {
+        Messages = e.Value?.ToString();
+        await MessagesChanged.InvokeAsync(Username);
+    }
+}

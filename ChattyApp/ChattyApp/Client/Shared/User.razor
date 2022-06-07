@@ -1,0 +1,22 @@
+﻿<div class="input-group">
+    <input value="@Username" class="form-control" @oninput="OnUsernameChanged" placeholder="username">
+    <button class="btn btn-primary form-control-append" @onclick="ConnectToHub">Connect</button>
+</div>
+
+@code {
+    [Parameter]
+    public string? Username { get; set; }
+
+    [Parameter]
+    public EventCallback Connect { get; set; }
+
+    [Parameter]
+    public EventCallback<string> UsernameChanged { get; set; }
+
+    private async Task ConnectToHub() => await Connect.InvokeAsync();
+    private async Task OnUsernameChanged(ChangeEventArgs e)
+    {
+        Username = e.Value?.ToString();
+        await UsernameChanged.InvokeAsync(Username);
+    }
+}
